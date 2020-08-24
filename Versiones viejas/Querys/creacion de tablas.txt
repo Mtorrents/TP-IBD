@@ -1,0 +1,28 @@
+domicilio
+localidad
+provincia
+calle
+
+microbus
+marca
+modelo
+
+recorrido
+distancia_recorrida
+plantilla_caja
+lista de pasajeros x recorrido
+paradas x recorridos
+chofer
+salida
+
+parada
+pasajero
+tipo_abono
+
+
+taller
+estacion_servicio
+tanque
+mantenimiento
+mantenimiento
+ 

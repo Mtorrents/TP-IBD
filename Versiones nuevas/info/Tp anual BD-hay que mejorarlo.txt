@@ -1,0 +1,200 @@
+Dispone de cuatro minibuses, de las cuales se conocen marca y modelo, el dominio (patente) y el kilometraje en el que le toca el próximo service de mantenimiento.
+
+minibus
+	-marca
+	-modelo
+	-patente
+	-kilometraje
+
+Cada vez que una combi sale a efectuar un "recorrido", se registra lo que se denomina una "salida", en la que se deja constancia de que combi sale, que recorrido efectúa, cuantos kilómetros registra el odómetro, quien es el chofer a cargo de la misma y fecha y hora de salida.
+
+recorrido_inicial(salida)
+	-minibus_patente
+	-recorrido
+	-kilometros_registrado_odometro
+	-chofer_CUIL		(asociado a la tabla choferes de abajo)
+	-fecha_hora_salida
+
+Cuando el móvil termina su recorrido, esa “salida” se modifica para ingresar la hora de finalización, los pasajes vendidos, el nuevo valor del odómetro y las novedades que hubieran surgido en el viaje
+
+fin_del_recorrido(fin de la salida)
+	-hora_de_finalizacion
+	-cant_pasajes_vendidos
+	-valor_odometro_final
+	-descripcion_de_novedades
+
+De los recorridos además de las paradas se conoce la distancia a recorrer en kilómetros y un nombre que lo identifica (por ejemplo, "Lanús - Plaza Constitución".
+
+distancias_a_recorrer
+	-Distancias_a_recorrer
+	-nombre
+
+Las paradas se identifican con la intersección de dos calles y la localidad a la que pertenecen. Debido a que algunos recorridos se cruzan, hay algunas paradas que figuran en más de un recorrido. 
+
+Paradas
+	-calle_1
+	-calle_2
+	_localidad
+
+
+De los choferes se conoce su apellido, nombre, un domicilio (calle, número, localidad y provincia), la fecha de ingreso a la empresa, número de licencia de conducir y su CUIL.
+
+choferes
+	-apellido
+	-nombre
+	-cod_domicio	(una tabla aparte)
+	-fecha_ingreso_a_la_empresa
+	-Nro_licencia_de_conducir
+	-CUIL
+
+De los pasajeros que pagan cualquier abono, se conoce el nombre, apellido, domicilio (calle, número, localidad y provincia) y dni.
+
+Pasajero
+	-nombre
+	-apellido
+	-cod_domicilio
+	-dni
+	-
+
+se adjunta a la "salida" una planilla con dichas paradas y los datos de los pasajeros que subirán al vehículo en cada una de ellas
+
+//AMI ME SUENA QUE SE TIENE QUE HACER UNA TABLA SALIDA Y AHI METER CONECCIONES CON LOS RECORRIDOS INICIAL Y FINAL, Y UNA LISTA DE PASAJEROS Y LISTA DE PARADAS :V
+
+
+En los abonos se registra en qué parada el pasajero usualmente subirá al vehículo; para el caso de los abonos que no restringen el recorrido, se registra la parada preferida para cada uno de ellos, y esta parada puede cambiar para un viaje si avisa de manera telefónica previamente. 
+
+la empresa registra los datos de los pasajeros si no los tiene registrados previamente y los agrega a la "salida".
+
+//-----------------------------------------------------------------------------
+A fin de rendir los boletos cobrados, cada chofer completa al final del "recorrido" una planilla en la que indica la caja inicial (la cantidad de dinero que la empresa le da para que tenga para dar vueltos y solventar cualquier gasto que surja antes de que cobre algún pasaje), la cantidad de boletos cobrados, el monto total cobrado y la caja final (suma de la inicial y el total de pasajes vendidos). 
+
+Si el conductor tuvo un gasto inesperado durante el recorrido, debe asentar en dicha planilla el gasto realizado y restarlo de la caja final. Existe una planilla de caja y se adjunta a la "salida" correspondiente.
+
+
+plantilla_de_caja (adjunta a la "salida")
+
+	-Caja_inicial(la cantidad de dinero para dar vueltos y solventar gastos)
+	-cant_de_boletos_cobrados
+	-monto_total_cobrado
+	-caja_final(suma de la inicial y el total de pasajes vendidos)
+	-gastos_inesperados
+
+//------------------------------------------------------------------
+
+Como cada móvil puede hacer un recorrido con un tanque completo (y le sobra), al final de cada recorrido se completa el tanque con el faltante de combustible.
+
+En una planilla por cada uno se registra la fecha de carga, los litros cargados, el monto total de la carga, el chofer que la realizó y la estación de servicio donde se realizó la misma. 
+
+tanque
+	-fecha_de_carga
+	-litros_cargados
+	-monto_carga
+	-chofer_cuil
+	-cod.estacion_de_servicio
+
+//----------------------------------------------------------------------
+De la estación de servicio se conoce la razón social, el cuit y el domicilio (calle, número, localidad y provincia).
+
+estacion_servicio
+	-razon_social
+	-cuit
+	-cod.domicilio
+
+//-------------------------------------------------
+
+Periódicamente se realizan mantenimientos tanto preventivos como correctivos (cuando algo se rompe) a los móviles en distintos talleres. A fin de conocer el historial de mantenimiento de cada vehículo, se confecciona una planilla en la que figura la fecha, el dominio del móvil, el taller, una descripción del servicio realizado, los kilómetros que indica el odómetro y el monto pagado. Del taller se conoce la razón social, el cuit y el domicilio (calle, número, localidad y provincia).
+
+
+mantenimiento
+	-fecha
+	-dominio_movil
+	-cuit.taller
+	-descripcion_del_servicio
+	-kilometros_odometro
+	-monto_pagado
+
+taller
+	-razon_social
+	-cuit
+	-cod.domicilio
+
+Se debe realizar un modelo que responda a las características relevadas en la empresa, de modo que pueda realizar las siguientes tareas:
+1) Emitir listados de clientes, con su correspondiente abono si lo tiene.
+
+2) Emitir listados de recorridos, con sus paradas.
+
+3) Emitir listados de historial de mantenimiento entre fechas, por móvil o taller.
+
+4) Confeccionar las planillas de salida, con las paradas en las que deba detenerse el móvil, y los pasajeros a recoger en cada una de ellas.
+
+5) Consultar la recaudación bruta ya sea por recorrido o por destino (provincia de
+Buenos Aires o CABA)
+
+6) Consultar los gastos por recorrido, por chofer o por chofer y entre fechas 
+
+7) Emitir un listado mensual de los gastos realizados por todos los choferes. 
+
+8) Emitir listados de consumo medio de combustible por km entre fechas (por recorrido, por móvil o por chofer), ordenado de mayor a menor. 
+
+9) Emitir listados de ganancia bruta por km, por recorrido.
+
+10) Emitir listado de cantidad de pasajeros transportados entre fechas por recorrido. 
+
+11) Emitir listado mensual de recaudación por recorrido o parada final. 
+
+12) Emitir listado de km recorridos entre fecha, para móvil o chofer. 
+
+13) Emitir listado de gastos de mantenimiento, por móvil 
+
+14) Emitir listado de ganancia bruta por recorrido, calculada como el total de pasajes vendidos menos los gastos entre fechas.
+ 
+15) Consultar la ganancia bruta de la empresa, calculada como el total de pasajes vendidos, más los abonos, menos el combustible y menos los gastos de mantenimiento.
+
+
+A fin de poder realizar consultas sobre el modelo, se debe generar un set de datos de acuerdo a los siguientes lineamientos:
+
+
+? Tres recorridos con diez paradas cada uno. La parada de origen origen debe ser la misma para todos (estación Lanús) Al menos dos recorridos deben cruzarse en una parada intermedia. Las estaciones finales son Plaza Constitución (10 km), Correo Central (13 km) y Agronomía (18 km). Para simplificar el problema, se supone que el camino es el mismo de ida y de vuelta.
+
+? Diez clientes con abono (siete con recorrido único, dos por recorrido y el restante con tres)
+
+? Diez salidas, cinco en un mes y cinco en el siguiente. Promedio de dos pasajeros sin abono por salida, que no tienen que ser únicos. Todos los móviles deben realizar al menos una salida.
+
+? Diez mantenimientos, cuatro en un mes y seis en el siguiente, repartidos entre dos talleres.
+
+? Diez cargas de combustible, repartidas entre dos estaciones de servicio. A fin de calcular las cargas, debe estimarse un consumo urbano promedio de 10 lts/km, con una variación de +/- 5% por recorrido
+
+Se deberá presentar la siguiente documentación:
+
+1) Diagrama Entidad Relación (DER) del modelo de datos. 2) Script SQL de creación de la base de datos en MySQL. 3) Script(s) SQL de inserción de los datos en la base anteriormente creada. 4) Script(s) con las consultas a la base de datos. 5) Archivo de texto conteniendo las respuestas de la base de datos a las consultas
+anteriores.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

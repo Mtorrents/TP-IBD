@@ -1,2 +1,2 @@
 # TP-IBD
-Tp anual de base de datos 1
+Tp anual de Introduccion a las bases de datos

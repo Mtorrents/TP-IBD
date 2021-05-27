@@ -1,6 +1,6 @@
 -- INSERT TP
 
-insert into calle values
+insert into street values
 (1,'Ituzaingo'),
 (2,'Roca'),
 (3,'Meeks'),
@@ -10,25 +10,25 @@ insert into calle values
 (7,'San Martìn'),
 (8,'Campichuelo');
 
-insert into localidad values
+insert into location values
 (1,'Lanus'),
 (2,'CABA'),
 (3,'Avellaneda'),
 (4,'Lomas de Zamora');
 
-insert into provincia values
+insert into province values
 (1,'Buenos Aires'),
 (2,'CABA');
 
--- Marca
-insert into marca values
+-- Brand
+insert into brand values
 (1,'Ford'),
 (2,'Subaru'),
 (3,'Chevrolet'),
 (4,'TATSA'),
 (5,'El Detalle');
 
-insert into modelo values
+insert into model values
 (1,'LP 031'),
 (2,'LP 457'),
 (3,'LT 567'),
@@ -36,7 +36,7 @@ insert into modelo values
 (5,'LU 678');
 
 
--- create table domicilio (
+-- create table address (
 -- 	   id_domicilio				int primary key,
 --     id_calle 					int references calle(id_calle),
 --     numero						int not null,
@@ -44,7 +44,7 @@ insert into modelo values
 --     id_provincia 				int references provincia(id_provincia)
 -- );
 
-insert into domicilio values
+insert into address values
 (1,1,2000,1,1),
 (2,2,2780,1,1),
 (3,3,1480,1,1),
@@ -53,7 +53,7 @@ insert into domicilio values
 (6,1,1000,1,1);
 
 
--- create table chofer(
+-- create table driver(
 -- 	chofer_cuil 				varchar(30) primary key,
 -- 	apellido 					varchar (20) not null,
 -- 	nombre 						varchar (20) not null,
@@ -62,7 +62,7 @@ insert into domicilio values
 -- 	nro_licencia 				varchar(30) not null
 -- );
 
- INSERT INTO chofer values
+ INSERT INTO driver values
  ('20-32567943-1','Perez','jorge',1,'20/05/2015',45567980);
  
  
